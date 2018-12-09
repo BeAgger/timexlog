@@ -16,7 +16,7 @@ Imports:
     user model: used in customr field validation function
 """
 
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, RecaptchaField
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
@@ -37,6 +37,9 @@ class RegistrationForm(FlaskForm):
     confirm_password = \
         PasswordField('Confirm Password',
                       validators=[DataRequired(), EqualTo('password')])
+    recaptcha = RecaptchaField()
+    agree_conditions = BooleanField('Agree to terms and conditions',
+                                    validators=[DataRequired()])
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):

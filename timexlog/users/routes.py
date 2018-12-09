@@ -53,7 +53,7 @@ def register():
     # check if form validated properly (when we come back to the form after submit)
     if form.validate_on_submit():
         hsh_pw = bcrypt_flask.generate_password_hash(form.password.data, 12).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hsh_pw)
+        user = User(username=form.username.data, email=form.email.data, password=hsh_pw, agree_conditions=form.agree_conditions.data)
         db.session.add(user)
         db.session.commit()
         flash('Account created. Please login.', 'success')

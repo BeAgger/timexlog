@@ -38,6 +38,7 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False,
                            default='default.png')
     password = db.Column(db.String(60), nullable=False)
+    agree_conditions = db.Column(db.Boolean, nullable=False, default=False)
     posts = db.relationship('Post', backref='author', lazy=True)
 
     def get_reset_token(self, expires_sec=1800):
@@ -61,7 +62,7 @@ class User(db.Model, UserMixin):
 
 
     def __repr__(self):
-        return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+        return f"User('{self.username}', '{self.email}', '{self.image_file}' , '{self.agree_conditions}')"
 
 
 class Post(db.Model):
