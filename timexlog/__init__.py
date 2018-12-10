@@ -15,7 +15,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
-from timexlog.config import Config
+from flask_migrate import Migrate
+from timexlog.config import app_config
 
 
 db = SQLAlchemy()
@@ -25,9 +26,9 @@ login_mgr.login_view = 'users.login'
 login_mgr.login_message_category = 'info'
 mail = Mail()
 
-
 # App factory function
-def create_app(config_class=Config):
+# def create_app(config_class=Config):
+def create_app(config_name):
     """
     App factory function
     Args: Configuration object for our app, ie dev, prod etc.
@@ -38,8 +39,11 @@ def create_app(config_class=Config):
             main.routes: main blueprint
             error.handlers: error blueprint
     """
+    # app = Flask(__name__)
+    # app.config.from_object(Config)
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(app_config[config_name])
+    # app.config.from_pyfile('config.py')
 
     from timexlog.users.routes import users
     from timexlog.blog.routes import blog
@@ -55,5 +59,9 @@ def create_app(config_class=Config):
     bcrypt_flask.init_app(app)
     login_mgr.init_app(app)
     mail.init_app(app)
+
+    migrate = Migrate(app, db)
+
+    # from timexlog import models
 
     return app

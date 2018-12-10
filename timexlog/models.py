@@ -79,3 +79,24 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
+
+
+class Timelog(db.Model):
+    """
+    Timelog entity class
+        id, customer, project, startdatetime, enddatetime, billable, comment, user_id
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    customer = db.Column(db.String(100), nullable=False)
+    project = db.Column(db.String(100), nullable=False)
+    datetime_start = db.Column(db.DateTime, nullable=True)
+    datetime_end = db.Column(db.DateTime, nullable=True)
+    billable = db.Column(db.Boolean, nullable=False, default=True)
+    comment = db.Column(db.String(100), nullable=True)
+    closed = db.Column(db.Boolean, nullable=True, default=False)
+    date_created = db.Column(db.DateTime, nullable=False,
+                             default=datetime.utcnow())
+
+    def __repr__(self):
+        return f"Post('{self.customer}', '{self.project}', '{self.datetime_start}', '{self.datetime_end}', '{self.billable}')"
