@@ -31,8 +31,10 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_ECHO = True
     SECRET_KEY = os.environ.get('TIMEX_SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///timexlog.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///timexlog/timexlog.db'
     #os.environ.get('TIMEX_SQLALCHEMY_DB_URI')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_RECORD_QUERIES = True
     RECAPTCHA_PUBLIC_KEY = os.environ.get('TIMEX_RECAPT_PUB')
     RECAPTCHA_PRIVATE_KEY = os.environ.get('TIMEX_RECAPT_PRI')
 
@@ -41,7 +43,14 @@ class ProductionConfig(Config):
     """
     Production configurations
     """
-    DEBUG = False
+    DEBUG = True
+    SQLALCHEMY_ECHO = False
+    SECRET_KEY = os.environ.get('TIMEX_SECRET_KEY')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///timexlog/timexlog.db' #os.environ.get('TIMEX_SQLALCHEMY_DB_URI')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    RECAPTCHA_PUBLIC_KEY = os.environ.get('TIMEX_RECAPT_PUB')
+    RECAPTCHA_PRIVATE_KEY = os.environ.get('TIMEX_RECAPT_PRI')
+
 
 app_config = {
     'development': DevelopmentConfig,
