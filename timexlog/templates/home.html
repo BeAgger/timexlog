@@ -1,7 +1,14 @@
 <!-- Home and root page -->
 {% extends "layout.html" %}
 {% block content %}
-	<div>
-		<a class="btn btn-info mb-4" href="{{ url_for('blog.home') }}">Blog</b></a>
+	<div class="content-section">
+		<h1>Time and Expense log</h1>
+		<p>
+			<a class="btn btn-info mt-4 mb-4" href="{{ url_for('timelog.dashboard') }}"><i class="fas fa-stopwatch"></i><b>&nbsp;&nbsp;Timelog</b></a>
+		</p>
+		<p>
+			<a class="btn btn-info mt-4 mb-4" href="{{ url_for('blog.home') }}"><i class="fas fa-blog"></i><b>&nbsp;&nbsp;Blog</b></a>
+		</p>
 	</div>
 {% endblock content %}
+<i class="fas fa-stopwatch"></i>

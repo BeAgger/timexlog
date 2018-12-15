@@ -40,6 +40,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
     agree_conditions = db.Column(db.Boolean, nullable=False, default=False)
     posts = db.relationship('Post', backref='author', lazy=True)
+    timelogs = db.relationship('Timelog', backref='employee', lazy=True)
 
     def get_reset_token(self, expires_sec=1800):
         """get_reset_token"""
@@ -84,18 +85,22 @@ class Post(db.Model):
 class Timelog(db.Model):
     """
     Timelog entity class
-        id, customer, project, startdatetime, enddatetime, billable, comment, user_id
+        id, customer, project, task, startdatetime, enddatetime, time_correction, billable, comment, user_id
     """
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     customer = db.Column(db.String(100), nullable=False)
     project = db.Column(db.String(100), nullable=False)
-    datetime_start = db.Column(db.DateTime, nullable=True)
+    task = db.Column(db.String(100), nullable=True)
+    datetime_start = db.Column(db.DateTime, nullable=False, \
+                               default=datetime.utcnow())
     datetime_end = db.Column(db.DateTime, nullable=True)
-    billable = db.Column(db.Boolean, nullable=False, default=True)
+    time_correction = db.Column(db.Numeric(precision=10, scale=2), \
+                                nullable=True)
+    billable = db.Column(db.Boolean, nullable=True, default=True)
     comment = db.Column(db.String(100), nullable=True)
     closed = db.Column(db.Boolean, nullable=True, default=False)
-    date_created = db.Column(db.DateTime, nullable=False,
+    date_created = db.Column(db.DateTime, nullable=False, \
                              default=datetime.utcnow())
 
     def __repr__(self):

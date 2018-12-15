@@ -1,0 +1,48 @@
+<!-- Timelog page -->
+{% extends "layout.html" %}
+{% block content %}
+	<h1>Timelog</h1>
+	<div class="media-body">
+		<form action="/timelog">
+			<div>
+				{% if current_user.is_authenticated %}
+					<a class="btn btn-info mb-4" href="{{ url_for('timelog.add') }}"><i class="fas fa-plus-circle"></i>&nbsp;Add</a>
+				{% endif %}
+			</div> 
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>User</th>
+						<th>Customer</th>
+						<th>Project</th>
+						<th>Task</th>
+						<th>Start</th>
+						<th>End</th>
+						<th>Correction</th>
+						<th>Billable</th>
+						<th>Comment</th>
+						<th>Closed</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>						
+				<tbody>
+					{% for timelog in timelogs %}
+						<tr>
+							<td>{{ timelog.employee.username }}</td>
+							<td>{{ timelog.customer }}</td>
+							<td>{{ timelog.project }}</td>
+							<td>{{ timelog.task }}</td>
+							<td>{{ timelog.datetime_start }}</td>
+							<td>{{ timelog.datetime_end }}</td>
+							<td>{{ timelog.time_correction }}</td>
+							<td>{{ timelog.billable }}</td>
+							<td>{{ timelog.comment }}</td>
+							<td>{{ timelog.closed }}</td>
+							<td>x</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</form>
+	</div>
+{% endblock content %}

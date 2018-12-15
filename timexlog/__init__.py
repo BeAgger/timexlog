@@ -47,11 +47,13 @@ def create_app(config_name):
 
     from timexlog.users.routes import users
     from timexlog.blog.routes import blog
+    from timexlog.timelog.routes import timelog
     from timexlog.main.routes import main
     from timexlog.errors.handlers import errors
 
     app.register_blueprint(users)
     app.register_blueprint(blog)
+    app.register_blueprint(timelog)
     app.register_blueprint(main)
     app.register_blueprint(errors)
 

@@ -31,7 +31,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_ECHO = True
     SECRET_KEY = os.environ.get('TIMEX_SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///timexlog/timexlog.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///timexlog.db'
     #os.environ.get('TIMEX_SQLALCHEMY_DB_URI')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
