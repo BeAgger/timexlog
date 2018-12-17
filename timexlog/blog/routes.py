@@ -43,7 +43,7 @@ def home():
     """Blog route and render form"""
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
-    return render_template('blog.html', posts=posts)
+    return render_template('blog/blog.html', posts=posts)
 
 
 @blog.route("/blog/post/new", methods=['GET', 'POST'])
@@ -58,7 +58,7 @@ def new_post():
         db.session.commit()
         flash('Your post has been created.', 'success')
         return redirect(url_for('blog.home'))
-    return render_template('create_post.html', title="New Post",
+    return render_template('blog/create_post.html', title="New Post",
                            form=form, legend='New Post')
 
 
@@ -66,7 +66,7 @@ def new_post():
 def post(post_id):
     """Show a post"""
     post_cur = Post.query.get_or_404(post_id)
-    return render_template('post.html', title=post_cur.title, post=post_cur)
+    return render_template('blog/post.html', title=post_cur.title, post=post_cur)
 
 
 @blog.route("/blog/user/<string:username>")
@@ -77,7 +77,7 @@ def user_posts(username):
     posts = Post.query.filter_by(author=user)\
         .order_by(Post.date_posted.desc())\
         .paginate(page=page, per_page=5)
-    return render_template('user_posts.html', posts=posts, user=user)
+    return render_template('blog/user_posts.html', posts=posts, user=user)
 
 
 @blog.route("/blog/post/<int:post_id>/update", methods=['GET', 'POST'])
@@ -101,7 +101,7 @@ def update_post(post_id):
         # else populate with current post data
         form.title.data = post_upd.title
         form.content.data = post_upd.content
-    return render_template('create_post.html', title='Update Post',
+    return render_template('blog/create_post.html', title='Update Post',
                            form=form, legend='Update Post')
 
 

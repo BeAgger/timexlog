@@ -8,12 +8,13 @@ Imports:
 
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, DateTimeField, DecimalField, \
-                    StringField, SubmitField
+                    IntegerField, StringField, SubmitField
 from wtforms.validators import DataRequired
 
 
 class TimelogForm(FlaskForm):
     """Show time entries"""
+    id = IntegerField('Id')
     customer = StringField('Customer', validators=[DataRequired()])
     project = StringField('Project', validators=[DataRequired()])
     task = StringField('Task')

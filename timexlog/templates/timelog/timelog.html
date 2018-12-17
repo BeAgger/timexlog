@@ -1,0 +1,58 @@
+<!-- Timelog page -->
+{% extends "timelog_layout.html" %}
+{% block content %}
+	<h1 class="mb-3">Timelog - {{ user.username }}</h1>
+	<div class="media-body">
+		<div>
+			<a class="btn btn-info mb-4" href="{{ url_for('timelog.add') }}"><i class="fas fa-plus-circle"></i>&nbsp;Add</a>
+			<a class="btn btn-info mb-4" href="{{ url_for('timelog.home') }}"><i class="fas fa-pen"></i>&nbsp;Update</a>
+		</div>	
+		<!--div class="table-responsive"-->
+			<table width="100%" class="table table-striped table-hover table-sm">
+				<thead class="steel">
+					<tr>
+						<th width="2%"><i>Id</i></th>
+						<th width="10%">Customer</th>
+						<th width="10%">Project</th>
+						<th width="10%">Task</th>
+						<th width="14%">Start</th>
+						<th width="14%">End</th>
+						<th width="10%">Correction</th>
+						<th width="4%">Billable</th>
+						<th width="16%">Comment</th>
+						<th width="4%">Closed</th-->
+						<th width="6%">&nbsp;</th>
+					</tr>
+				</thead>						
+				<tbody>
+					{% for timelog in timelogs %}
+						<tr><div id="timelogRow{{ timelog.id }}">
+							<td><i>{{ timelog.id }}</i></td>
+							<td>
+								<input type="text" class="form-control-sm col-12" id="customer{{ timelog.id }}" value="{{ timelog.customer }}">
+							</td>
+							<td>
+								<input type="text" class="form-control-sm col-12" id="project{{ timelog.id }}" value="{{ timelog.project }}">
+							</td>
+							<td>
+								<input type="text" class="form-control-sm col-12" id="task{{ timelog.id }}" value="{{ timelog.task }}">
+							</td>
+							<td>{{ timelog.datetime_start }}</td>
+							<td>{{ timelog.datetime_end }}</td>
+							<td>{{ timelog.time_correction }}</td>
+							<td>{{ timelog.billable }}</td>
+							<td>
+								<input type="text" class="form-control-sm col-12" id="comment{{ timelog.id }}" value="{{ timelog.comment }}">
+							</td>
+							<td>{{ timelog.closed }}</td>
+							<td>
+								<button class="btn btn-primary btn-sm mt-1 mb-1 updateButton" timelog_id="{{ timelog.id }}"><i class="fas fa-save"></i></button>
+							</td></div>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		<!--/div-->
+	</div>
+{% endblock content %}
+

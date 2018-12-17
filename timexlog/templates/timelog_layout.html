@@ -1,0 +1,24 @@
+<!-- Main timelog container -->
+{% extends "base.html" %}
+{% block container %}
+	<main role="main" class="container">
+		
+			<div class="col-md-12">
+				{% with messages = get_flashed_messages(with_categories=true) %}
+					{% if messages %}
+						{% for category, message in messages %}
+							<div class="alert alert-{{ category }}">
+								{{ message }}
+							</div>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
+				{% block content %}
+					<!-- this will be replaced by the specific html files -->
+				{% endblock %}
+			</div>
+		
+	</main>
+	
+{% endblock %}
+class="row"

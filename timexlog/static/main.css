@@ -79,3 +79,14 @@ a.article-title:hover {
 .account-heading {
   font-size: 2.5rem;
 }
+
+thead.steel {
+    background-color: #5f788a;
+    color: #cbd5db;
+    font-weight: 500;
+} 
+
+.table-hover> tbody> tr:hover{
+    background-color: #d0f0c0;
+    
+}

@@ -1,0 +1,47 @@
+<!-- Timelog page -->
+{% extends "timelog_layout.html" %}
+{% block content %}
+	<h1>Timelog - Dashboard</h1>
+	<div class="media-body">
+		<div>
+			<a class="btn btn-info mb-4" href="{{ url_for('timelog.add') }}"><i class="fas fa-plus-circle"></i>&nbsp;Add</a>
+			<a class="btn btn-info mb-4" href="{{ url_for('timelog.home') }}"><i class="fas fa-pen"></i>&nbsp;Update</a>
+		</div> 
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th><i>Id</i></th>
+					<th>User</th>
+					<th>Customer</th>
+					<th>Project</th>
+					<th>Task</th>
+					<th>Start</th>
+					<th>End</th>
+					<th>Correction</th>
+					<th>Billable</th>
+					<th>Comment</th>
+					<th>Closed</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>						
+			<tbody>
+				{% for timelog in timelogs %}
+					<tr>
+						<td><i>{{ timelog.id }}</i></td>
+						<td>{{ timelog.employee.username }}</td>
+						<td>{{ timelog.customer }}</td>
+						<td>{{ timelog.project }}</td>
+						<td>{{ timelog.task }}</td>
+						<td>{{ timelog.datetime_start }}</td>
+						<td>{{ timelog.datetime_end }}</td>
+						<td>{{ timelog.time_correction }}</td>
+						<td>{{ timelog.billable }}</td>
+						<td>{{ timelog.comment }}</td>
+						<td>{{ timelog.closed }}</td>
+						<td>+x</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock content %}

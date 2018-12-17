@@ -58,7 +58,7 @@ def register():
         db.session.commit()
         flash('Account created. Please login.', 'success')
         return redirect(url_for('users.login'))
-    return render_template('register.html', title='Register', form=form)
+    return render_template('auth/register.html', title='Register', form=form)
 
 
 @users.route("/login", methods=['GET', 'POST'])
@@ -77,7 +77,7 @@ def login():
             # flash('You have been logged in', 'success')
         else:
             flash('Access denied. Login failed!', 'danger')
-    return render_template('login.html', title='Login', form=form)
+    return render_template('auth/login.html', title='Login', form=form)
 
 
 @users.route("/logout")
@@ -107,7 +107,7 @@ def account():
 
     image_file = url_for('static',
                          filename=f'profile_pics/{current_user.image_file}')
-    return render_template('account.html', title='Account',
+    return render_template('auth/account.html', title='Account',
                            image_file=image_file, form=form)
 
 
@@ -122,7 +122,7 @@ def reset_request():
         send_reset_email(user)
         flash('An email has been sent with reset instructions.', 'info')
         return redirect(url_for('users.login'))
-    return render_template('reset_request.html', title='Reset Password', form=form)
+    return render_template('auth/reset_request.html', title='Reset Password', form=form)
 
 
 @users.route("/reset_password/<token>", methods=['GET', 'POST'])
@@ -141,4 +141,4 @@ def reset_token(token):
         db.session.commit()
         flash('Password updated. Please login.', 'success')
         return redirect(url_for('users.login'))
-    return render_template('reset_token.html', title='Reset Password', form=form)
+    return render_template('auth/reset_token.html', title='Reset Password', form=form)

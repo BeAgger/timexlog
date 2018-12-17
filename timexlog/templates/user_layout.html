@@ -1,0 +1,22 @@
+<!-- Main user/auth container -->
+{% extends "base.html" %}
+{% block container %}
+	<main role="main" class="container">
+		<div class="row">
+			<div class="col-md-8">
+				{% with messages = get_flashed_messages(with_categories=true) %}
+					{% if messages %}
+						{% for category, message in messages %}
+							<div class="alert alert-{{ category }}">
+								{{ message }}
+							</div>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
+				{% block content %}
+					<!-- this will be replaced by the specific html files -->
+				{% endblock %}
+			</div>
+		</div>
+	</main>
+{% endblock %}
